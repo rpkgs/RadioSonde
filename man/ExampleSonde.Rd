@@ -1,9 +1,7 @@
 \name{ExampleSonde}
 \alias{ExampleSonde}
 \title{Example Sonde/Balloon/Profiler Data}
-\usage{
-data(ExampleSonde)
-}
+
 \description{
 This data was collected by a radiosonde which was carried aloft by a 
 weather balloon. This data was collected as part of a special field

@@ -1,8 +1,7 @@
 \name{sample.sonde}
 \alias{sample.sonde}
-\non_function{}
 \title{Example R dataframe for radiosonde observations}
-\usage{data("sample.sonde")}
+
 \description{
 The \code{sample.sonde} data frame has 461 rows and 21 columns.
 The columns are different physical measurements made during the balloon's

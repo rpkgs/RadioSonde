@@ -1,5 +1,5 @@
 Package: RadioSonde
-Version: 1.2-7
+Version: 1.2-8
 Date: 2004-10-16
 Title: Tools for plotting skew-T diagrams and wind profiles
 Author: Tim Hoar, Eric Gilleland, Doug Nychka
@@ -12,5 +12,4 @@ Description: RadioSonde is a collection of programs for reading and
  header followed by specific variables.  Use "help(ExampleSonde)" for 
  the full explanation of the data files.
 License: GPL (Version 2 or later)
-URL: http://www.cgd.ucar.edu/stats/Software/RadioSonde
-Packaged: Tue Nov 16 13:56:21 2004; thoar
+URL: http://www.image.ucar.edu/Software/RadioSonde
