@@ -7,7 +7,7 @@
    dewpoint temperature traces versus (log) pressure. Optionally plots
    the vertical wind profile using wind barbs.
 }
-\usage{ plotsonde(dataframe, skewT=T, winds=T, site="", title="",
+\usage{ plotsonde(dataframe, skewT=TRUE, winds=FALSE, site="", title="",
            windplot=NULL, s=3, col=c(1, 2), ... ) }
 
 \arguments{

@@ -8,7 +8,7 @@ weather balloon (\emph{radiosonde}). Use \code{skewt.lines} or \code{skewt.point
 to layer information on top of the skewt axis.
 }
 \usage{
-skewt.axis(BROWN="brown", GREEN="green", redo=F, ... )
+skewt.axis(BROWN="brown", GREEN="green", redo=FALSE, ... )
 }
 \arguments{
   \item{BROWN}{ Color of lines for both Temperature (solid skewed) and 

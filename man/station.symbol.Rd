@@ -8,7 +8,7 @@
 \usage{
 station.symbol(cx, cy, direction = 0, speed = 0, fill = 0, 
 		color = "green", temp = NULL, press = NULL, 
-		dewpt = NULL, circle=T, cex = 2)
+		dewpt = NULL, circle=TRUE, cex = 2)
 }
 
 \arguments{
