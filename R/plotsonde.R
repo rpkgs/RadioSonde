@@ -33,7 +33,7 @@ function (dataframe, skewT=TRUE, winds=FALSE, site = "", title = "",
 
        mar.skewt <- c(5.0999999999999996, 1.1000000000000001, 
                       2.1000000000000001, 5.0999999999999996)
-       skewt.plt <- skewt.axis(mar = mar.skewt)
+       skewt.plt <- skewt.axis(mar = mar.skewt)$plt
        title(title)
 
        if(is.null(windplot)) {

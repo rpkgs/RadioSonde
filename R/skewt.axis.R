@@ -81,17 +81,6 @@ function(BROWN = "brown", GREEN = "green", redo = FALSE, ...)
 	#
 	#---------------------------------------------------------------------
 	par(pty = "s", ... )
-	# Declare moist adiabat values and pressures of the tops of the
-	# moist adiabats.  All moist adiabats to be plotted begin at 1050 mb.
-	pseudo <- c(32, 28, 24, 20, 16, 12, 8)
-	NPSEUDO <- length(pseudo)
-	# MOIST ADIABATS
-	lendps <- rep(250, times = NPSEUDO)
-	# Declare mixing ratio lines.  All mixing ratio lines will begin 
-	# at 1050 mb and end at 400 mb.
-	mixrat <- c(20, 12, 8, 5, 3, 2, 1)
-	NMIX <- length(mixrat)
-	# MIXING RATIO LINES
 	# --- Define absoulute x,y max/min bounds corresponding to the outer
 	# --- edges of the diagram. These are computed by inverting the 
 	# --- appropriate
@@ -202,10 +191,12 @@ function(BROWN = "brown", GREEN = "green", redo = FALSE, ...)
 	# --- 400 mb is computed in order to get x,y locations of the top of
 	# --- the lines.
 	#---------------------------------------------------------------------
+	mixrat <- c(20, 12, 8, 5, 3, 2, 1)
+	NMIX <- length(mixrat)
 	# --- Compute y coordinate at the top 
 	# --- (i.e., right end of slanted line) and
 	# --- the bottom of the lines.
-	#     --- SPECIAL CASE OF MIXING RATIO == 20
+	# --- SPECIAL CASE OF MIXING RATIO == 20
 	yr <- skewty(440.)
 	# y-coord at top (i.e. right)
 	tmix <- tmr(mixrat[1], 440.)
@@ -262,13 +253,14 @@ function(BROWN = "brown", GREEN = "green", redo = FALSE, ...)
 	}
 	#---------------------------------------------------------------------
 	# --- DRAW MOIST ADIABATS UP TO ~ 250hPa  
+	# Declare moist adiabat values and pressures of the tops of the
+	# moist adiabats.  All moist adiabats to be plotted begin at 1050 mb.
 	#---------------------------------------------------------------------
+	# declare pressure range
+	# convert to plotter coords and declare space for x coords
 	p <- seq(from = 1050, to = 240, by = -10)
-	# pressures
 	npts <- length(p)
-	# should be ~100
 	sy <- skewty(p)
-	# in plotter coords
 	sx <- double(length = npts)
 	# 
 	# Generating the data for the curves can be time-consuming.
@@ -276,6 +268,8 @@ function(BROWN = "brown", GREEN = "green", redo = FALSE, ...)
 	# need to regenerate the curves, you need to set redo to TRUE
 	# 
 	if(redo) {
+	        pseudo <- c(32, 28, 24, 20, 16, 12, 8)
+	        NPSEUDO <- length(pseudo)
 		holdx <- matrix(0, nrow = npts, ncol = NPSEUDO)
 		holdy <- matrix(0, nrow = npts, ncol = NPSEUDO)
 		for(ipseudo in 1:NPSEUDO) {
@@ -284,25 +278,51 @@ function(BROWN = "brown", GREEN = "green", redo = FALSE, ...)
 				moist <- satlft(pseudo[ipseudo], p[ilen])
 				sx[ilen] <- skewtx(moist, sy[ilen])
 			}
+                        # find the adiabats outside the plot region and
+                        # wipe 'em out.
+                        inds <- (sx < xmin)
+                        sx[inds] <- NA
+                        sy[inds] <- NA
 			holdx[, ipseudo] <- sx
 			holdy[, ipseudo] <- sy
 		}
-		return(list(holdx, holdy))
 	}
 	else {
 		holdx <- skewt.data$pseudox
 		holdy <- skewt.data$pseudoy
+                pseudo <- skewt.data$pseudo
+                NPSEUDO <- skewt.data$NPSEUDO
 	}
+	# 
+	# Finally draw the curves. Any curves that extend beyond
+        # the left axis are clipped. Those curves only get annotated
+        # at the surface.
+	# 
 	for(ipseudo in 1:NPSEUDO) {
+                # plot the curves
 		sx <- holdx[, ipseudo]
 		sy <- holdy[, ipseudo]
 		lines(sx, sy, lty = 1, col = GREEN)
+                # annotate the curves -- at the top
 		moist <- satlft(pseudo[ipseudo], 230)
 		labely <- skewty(230)
+		labelx <- skewtx(moist, labely)
+                if (labelx > xmin) 
+		text(labelx, labely, labels = as.character(pseudo[ipseudo]),
+			col = GREEN, adj = 0.5, cex = 0.75)
+                # annotate the curves -- at the surface
+		moist <- satlft(pseudo[ipseudo], 1100)
+		labely <- skewty(1100)
 		labelx <- skewtx(moist, labely)
 		text(labelx, labely, labels = as.character(pseudo[ipseudo]),
 			col = GREEN, adj = 0.5, cex = 0.75)
 	}
-	invisible()
-	return(par()$plt)
+	# 
+        # Most of the time, the only thing that needs to be returned by the 
+        # routine is the plot boundaries so we know where to put the wind 
+        # plot. However, if you are redrawing the curves, you need to be 
+        # able to save the new curve data.
+	# 
+	invisible(list(pseudox=holdx, pseudoy=holdy, pseudo=pseudo, 
+                 NPSEUDO=NPSEUDO, plt=par()$plt))
 }

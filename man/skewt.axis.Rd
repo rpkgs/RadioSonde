@@ -56,5 +56,12 @@ skewt.lines( sample.sonde$temp,  sample.sonde$press, col = 6)
 skewt.lines( sample.sonde$dewpt, sample.sonde$press, col = 7)
 skewt.points(sample.sonde$temp,  sample.sonde$press, col = 3)
 skewt.points(sample.sonde$dewpt, sample.sonde$press, col = 4)
+#
+# Changing the moist adiabats: you must edit the \code{skewt.axis} function
+# directly and then capture the output in \code{skewt.data} to be used in 
+# subsequent calls.
+skewt.data <- skewt.axis(redo=TRUE)
+skewt.axis() 
+skewt.axis() 
 }
 \keyword{ hplot }
