@@ -4,6 +4,8 @@
 \alias{skewt.data}
 \alias{skewtx}
 \alias{skewty}
+\alias{sonde.data}
+\alias{td.to.q}
 \alias{wobf}
 
 \title{
@@ -21,6 +23,10 @@ skewt.data
 skewtx(temp, ycoord)
 
 skewty(pres) 
+
+sonde.data
+
+td.to.q(temp, td, p)
 
 wobf
 

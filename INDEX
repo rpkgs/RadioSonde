@@ -1,4 +1,5 @@
 ExampleSonde            Example Sonde/Balloon/Profiler Data
+PWV                     Precipitable Water Vapor 
 RadioSonde internal     RadioSonde internal and secondary functions 
 getsonde                read a radiosonde file to an R dataframe.
 plotsonde               Creates a SKEW-T, log p diagram for a
