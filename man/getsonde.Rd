@@ -89,7 +89,7 @@ automatically interpreted without knowledge of the recording system.}
 # The datakey,varkey,and unitkey arguments come from examining 
 # the datafile. The whitespace is important.
 
-filename <- paste(.path.package("RadioSonde"),"data","ExampleSonde.txt",sep="/")
+filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
 datakey  <- "------"
 varkey   <- " Time"
 unitkey  <- "  sec"

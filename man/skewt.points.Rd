@@ -25,7 +25,7 @@
 #    overlay the temperature observations in a different color
 #    you get the point ...
 
-filename <- paste(.path.package("RadioSonde"),"data","ExampleSonde.txt",sep="/")
+filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
 sample.sonde <- getsonde(filename)
 skewt.axis()
 skewt.lines( sample.sonde$temp,  sample.sonde$press, col = 6)

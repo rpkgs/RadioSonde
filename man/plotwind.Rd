@@ -36,7 +36,7 @@
 
 \examples{
 # Example 1:
-filename <- paste(.path.package("RadioSonde"),"data","ExampleSonde.txt",sep="/")
+filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
 sample.sonde <- getsonde(filename)
 plotwind(sample.sonde)
 # Example 2:

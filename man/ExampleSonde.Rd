@@ -91,7 +91,7 @@ The JOSS QC flag codes are as follows:\cr
           \code{\link{skewt.points}} }
 
 \examples{
-filename <- paste(.path.package("RadioSonde"),"data","ExampleSonde.txt",sep="/")
+filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
 sample.sonde <- getsonde(filename)
 }
 
