@@ -1,6 +1,6 @@
 Package: RadioSonde
-Version: 1.2
-Date: January 4 2002
+Version: 1.2-1
+Date: 2002-09-30
 Title: Tools for plotting skew-T diagrams and winds profiles
 Author: Tim Hoar, Eric Gilleland, Doug Nychka
 Maintainer: Tim Hoar <thoar@ucar.edu>

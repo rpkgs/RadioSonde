@@ -31,7 +31,7 @@ function(dataframe, size = 5., ylim = c(1050, 100), legend = FALSE)
 	speed <- dataframe$wspd
 	speed <- round(speed, digits = 0.)
 	speed <- as.integer(speed)
-	plot(c(-1.5, 1.5), ylim, axes = F, type = "n", xlab = "", ylab = "")
+	plot(c(-1.5, 1.5), ylim, axes = FALSE, type = "n", xlab = "", ylab = "")
 	if(legend) {
 		mtext("full barb = 10 m/s", side = 1, line = 1)
 	}
@@ -42,7 +42,7 @@ function(dataframe, size = 5., ylim = c(1050, 100), legend = FALSE)
 		if(!is.na(speed[k])) {
 			if(speed[k] != 999.) {
 	station.symbol(0., y[k], speed = speed[k], direction = 
-					theta[k], circle=F, cex = size)
+					theta[k], circle=FALSE, cex = size)
 			}
 		}
 	}

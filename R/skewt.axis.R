@@ -1,5 +1,5 @@
 "skewt.axis" <-
-function(BROWN = "brown", GREEN = "green", redo = F, ...)
+function(BROWN = "brown", GREEN = "green", redo = FALSE, ...)
 {
 #
 # Copyright 2001,2002 Tim Hoar, and Doug Nychka
@@ -115,7 +115,7 @@ function(BROWN = "brown", GREEN = "green", redo = F, ...)
 	# t=5C, p=400 is corner
 	xc <- c(xmin, xmin, xmax, xmax, kinkx, kinkx, xmin)
 	yc <- c(ymin, ymax, ymax, skewty(625), skewty(400), ymin, ymin)
-	plot(xc, yc, type = "l", axes = F, xlab = "", ylab = "", lwd = 
+	plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 
 		0.10000000000000001)
 	# --- label horizontal axis with degrees F from -20,100 by 20
 	ypos <- skewty(1050)

@@ -1,5 +1,5 @@
 plotsonde <- 
-function (dataframe, skewT=T, winds=F, site = "", title = "", 
+function (dataframe, skewT=TRUE, winds=FALSE, site = "", title = "", 
             windplot = NULL, s = 3., col = c(1, 2), ... ){
 #
 # Copyright 2001,2002 Tim Hoar, Eric Gilleland, and Doug Nychka
@@ -60,9 +60,9 @@ function (dataframe, skewT=T, winds=F, site = "", title = "",
        # top and bottom mar the same as skewt
        #
         print( windplot)
-        par(new = T, pty = "m", plt = windplot, err = -1.)
-        plotwind(dataframe = dataframe, size = s, legend = F)
-        par(plt = first.par$plt, mar = first.par$mar, new = F, pty = first.par$
+        par(new = TRUE, pty = "m", plt = windplot, err = -1.)
+        plotwind(dataframe = dataframe, size = s, legend = FALSE)
+        par(plt = first.par$plt, mar = first.par$mar, new = FALSE, pty = first.par$
                 pty, usr = first.par$usr)
         #       title1 <- paste(site, ": ", month.year, " ", time, sep = "")
         invisible()

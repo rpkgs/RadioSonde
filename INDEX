@@ -1,12 +1,12 @@
-ExampleSonde             Example Sonde/Balloon/Profiler Data
-RadioSonde internal      RadioSonde internal and secondary functions
-getsonde                 read a radiosonde file to an R dataframe.
-plot.wind                Winds Profile Plot
-plotsonde                Creates a SKEW-T, log p diagram for a radiosonde
-                         dataframe.
-sample.sonde             Example R dataframe for radiosonde observations
-skewt.axis               Draws a SKEW-T, log p axis.
-skewt.lines              Overlays data on a SKEW-T, log p axis
-skewt.points             Overlays data on a SKEW-T, log p axis
-station.symbol           Adds a meteorological surface station annotation
-                         to a plot.
+ExampleSonde            Example Sonde/Balloon/Profiler Data
+RadioSonde internal     RadioSonde internal and secondary functions 
+getsonde                read a radiosonde file to an R dataframe.
+plotsonde               Creates a SKEW-T, log p diagram for a
+                        radiosonde dataframe.
+plotwind                Winds Profile Plot 
+sample.sonde            Example R dataframe for radiosonde observations
+skewt.axis              Draws a SKEW-T, log p axis. 
+skewt.lines             Overlays data on a SKEW-T, log p axis
+skewt.points            Overlays data on a SKEW-T, log p axis
+station.symbol          Adds a meteorological surface station
+                        annotation to a plot. 
