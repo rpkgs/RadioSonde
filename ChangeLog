@@ -1,0 +1,3 @@
+16 Nov 2004 ... removed the data directory and sample.sonde.Rdata 
+                It wasn't being used and was creating problems on the Windows
+                installs because it couldn't be zipped. 
