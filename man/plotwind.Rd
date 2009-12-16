@@ -36,10 +36,9 @@
 
 \examples{
 # Example 1:
-filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
-sample.sonde <- getsonde(filename)
-plotwind(sample.sonde)
+data(ExampleSonde)
+plotwind(ExampleSonde)
 # Example 2:
-plotwind(sample.sonde, size = 7, legend=TRUE)
+plotwind(ExampleSonde, size = 7, legend=TRUE)
 }
 \keyword{ hplot }          % at least one, from doc/KEYWORDS

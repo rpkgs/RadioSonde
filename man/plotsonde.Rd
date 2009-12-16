@@ -11,8 +11,8 @@
            windplot=NULL, s=3, col=c(1, 2), ... ) }
 
 \arguments{
-  \item{dataframe}{ R dataframe of a radiosonde dataset 
-                (as created by \code{getsonde}) }
+  \item{dataframe}{ R dataframe with  at least the components 
+\code{c( "press", "temp",  "dewpt")} corresponding to pressure (hPa), temperature (C) and dew point temperature (C).   }
   \item{skewT}{ Logical value.  If false, will not plot the 
 	        SKEW-T, log p diagram. }
   \item{winds}{ Logical value.  If false, will not plot the
@@ -29,7 +29,7 @@
   \item{...}{ Other optional plotting parameters. }
 }
 \value{
-  No value returned.  Creates a plot.
+  No value returned.  Creates a  skewt plot. Note that default is temperature horizontal scale is Farenheit. 
 }
 \references{ 
 	1.  Department of Defense, 1969, "USAF SKEW-T, log p DIAGRAM,"
@@ -60,10 +60,8 @@
           \code{\link{skewt.points}} }
 
 \examples{
-# Example 1
-filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
-sample.sonde <- getsonde(filename)
-plotsonde(sample.sonde)
+data(ExampleSonde)
+plotsonde(ExampleSonde, winds=TRUE)
 }
 \keyword{ hplot }% at least one, from doc/KEYWORDS
 \keyword{ aplot }% __ONLY ONE__ keyword per line

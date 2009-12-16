@@ -49,13 +49,12 @@ ratio (dashed) }
 #    overlay the temperature observations in a different color
 #    you get the point ...
 #
-filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
-sample.sonde <- getsonde(filename)
+data(ExampleSonde)
 skewt.axis( mar=c(5.1, 1.1, 2.1, 5.1) )
-skewt.lines( sample.sonde$temp,  sample.sonde$press, col = 6)
-skewt.lines( sample.sonde$dewpt, sample.sonde$press, col = 7)
-skewt.points(sample.sonde$temp,  sample.sonde$press, col = 3)
-skewt.points(sample.sonde$dewpt, sample.sonde$press, col = 4)
+skewt.lines( ExampleSonde$temp,  ExampleSonde$press, col = 6)
+skewt.lines( ExampleSonde$dewpt, ExampleSonde$press, col = 7)
+skewt.points(ExampleSonde$temp,  ExampleSonde$press, col = 3)
+skewt.points(ExampleSonde$dewpt, ExampleSonde$press, col = 4)
 #
 # Changing the moist adiabats: you must edit the \code{skewt.axis} function
 # directly and then capture the output in \code{skewt.data} to be used in 

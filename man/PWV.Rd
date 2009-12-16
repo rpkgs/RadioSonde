@@ -28,13 +28,12 @@ PWV(sonde = NULL, press, td, temp, minp = 400)
 
 \examples{
 # Example 1
-filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
-sample.sonde <- getsonde(filename)
 
+data(ExampleSonde)
 ######
 # OK, now find precipitable water vapor.
 
-PWV( sample.sonde)
+PWV(ExampleSonde)
 
 }
 \keyword{ manip }% at least one, from doc/KEYWORDS

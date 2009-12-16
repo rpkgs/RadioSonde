@@ -1,11 +1,22 @@
-\name{sample.sonde}
-\alias{sample.sonde}
-\title{Example R dataframe for radiosonde observations}
+\name{ExampleSonde}
+\alias{ExampleSonde}
+\alias{ExampleSondeText}
+\title{Example of radiosonde observations}
 
 \description{
-The \code{sample.sonde} data frame has 461 rows and 21 columns.
+The \code{ExampleSonde} data frame has 461 rows and 21 columns.
 The columns are different physical measurements made during the balloon's
-ascent.
+ascent. \code{ExampleSondeText} is an image of a text file that allows for testing the 
+getsonde function and is an example of a format with metadata used to document a 
+sounding. 
+
+These data are a sounding from a well known field experiment TOGA/COARE studying the 
+larege scale dynamical relationship of the Tropical Pacific and the atmospshere. 
+This particular sounding was launched January 17, 1993 17:12 GMT from Kavieng, New Guninea. 
+To write out the text dataset to a sounding file just use:
+
+\code{ data(ExampleSondeText) ;  write( ExampleSondeText, file="sondedata.txt")}
+
 }
 \format{
     This data frame contains the following named components:

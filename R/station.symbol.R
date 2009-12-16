@@ -1,161 +1,211 @@
-"station.symbol" <-
-function (cx, cy, direction = 0, speed = 0, fill = 0, color = "green",
-    temp = NULL, press = NULL, dewpt = NULL, circle=TRUE, cex = 2)
+station.symbol <-
+function (cx, cy, direction=0, speed=NA, fill=rep(0,length(cx)), temp=NA, press=NA, dewpt=NA, circle=TRUE, cex=1)
 {
-#
-# Copyright 2001,2002 Eric Gilleland, and Doug Nychka
-#
-# This file is part of the RadioSonde library for R and related languages.
-#
-# RadioSonde is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
-#
-# RadioSonde is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with RadioSonde; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#
-    tpar <- par()
-    size <- tpar$csi
-    scalex <- (tpar$usr[2] - tpar$usr[1])/(tpar$pin[1])
-    scaley <- (tpar$usr[4] - tpar$usr[3])/(tpar$pin[2])
-    scalex <- (cex * (scalex * size))/5
-    scaley <- (cex * (scaley * size))/5
-    xs <- if (speed > 0) {
-        X1 <- 0
-        X2 <- 0
-        Y1 <- 0
-        Y2 <- 5
-        if (speed >= 5 & speed < 10) {
-            X1 <- c(X1, 0)
-            X2 <- c(X2, 1)
-            Y1 <- c(Y1, 5)
-            Y2 <- c(Y2, 5)
-        }
-        if (speed >= 10 & speed < 15) {
-            X1 <- c(X1, 0)
-            X2 <- c(X2, 2)
-            Y1 <- c(Y1, 5)
-            Y2 <- c(Y2, 5)
-        }
-        if (speed >= 15 & speed < 20) {
-            X1 <- c(X1, 0, 0)
-            X2 <- c(X2, 1, 2)
-            Y1 <- c(Y1, 4, 5)
-            Y2 <- c(Y2, 4, 5)
-        }
-        if (speed >= 20 & speed < 25) {
-            X1 <- c(X1, 0, 0)
-            X2 <- c(X2, 2, 2)
-            Y1 <- c(Y1, 4, 5)
-            Y2 <- c(Y2, 4, 5)
-        }
-        if (speed >= 25 & speed < 30) {
-            X1 <- c(X1, 0, 0, 0)
-            X2 <- c(X2, 1, 2, 2)
-            Y1 <- c(Y1, 3, 4, 5)
-            Y2 <- c(Y2, 3, 4, 5)
-        }
-        if (speed >= 30 & speed < 35) {
-            X1 <- c(X1, 0, 0, 0)
-            X2 <- c(X2, 2, 2, 2)
-            Y1 <- c(Y1, 3, 4, 5)
-            Y2 <- c(Y2, 3, 4, 5)
-        }
-        if (speed >= 35 & speed < 40) {
-            X1 <- c(X1, 0, 0, 0, 0)
-            X2 <- c(X2, 1, 2, 2, 2)
-            Y1 <- c(Y1, 2, 3, 4, 5)
-            Y2 <- c(Y2, 2, 3, 4, 5)
-        }
-        if (speed >= 40 & speed < 45) {
-            X1 <- c(X1, 0, 0, 0, 0)
-            X2 <- c(X2, 2, 2, 2, 2)
-            Y1 <- c(Y1, 2, 3, 4, 5)
-            Y2 <- c(Y2, 2, 3, 4, 5)
-        }
-        if (speed >= 45 & speed < 50) {
-            X1 <- c(X1, 0, 0, 0, 0, 0)
-            X2 <- c(X2, 1, 2, 2, 2, 2)
-            Y1 <- c(Y1, 1, 2, 3, 4, 5)
-            Y2 <- c(Y2, 1, 2, 3, 4, 5)
-        }
-        if (speed >= 50 & speed < 55) {
-            X1 <- c(X1, 0, 0)
-            X2 <- c(X2, 2, 2)
-            Y1 <- c(Y1, 4, 5)
-            Y2 <- c(Y2, 4.5, 4.5)
-        }
-        if (speed >= 55 & speed < 60) {
-            X1 <- c(X1, 0, 0, 0)
-            X2 <- c(X2, 1, 2, 2)
-            Y1 <- c(Y1, 3, 4, 5)
-            Y2 <- c(Y2, 3, 4.5, 4.5)
-        }
-        if (speed >= 60 & speed < 65) {
-            X1 <- c(X1, 0, 0, 0)
-            X2 <- c(X2, 2, 2, 2)
-            Y1 <- c(Y1, 3, 4, 5)
-            Y2 <- c(Y2, 3, 4.5, 4.5)
-        }
-        direction <- (direction/360) * 2 * pi
-        rot <- cbind(c(cos(direction), -sin(direction)), c(sin(direction),
-            cos(direction)))
-        S1 <- rbind(X1, Y1)
-        S2 <- rbind(X2, Y2)
-        S1 <- rot %*% S1
-        S2 <- rot %*% S2
-        S1 <- S1 * c(scalex, scaley) + c(cx, cy)
-        S2 <- S2 * c(scalex, scaley) + c(cx, cy)
-    }
-    if (speed > 0) {
-        segments(S1[1, ], S1[2, ], S2[1, ], S2[2, ])
-    }
+ ### press is actually height in upper air ###
+ ns = length(cx)
+ if (length(cy) != ns)	stop("X AND Y COORDINATES SHOULD HAVE SAME LENGTH!")
+ msg = "ALL VARIABLES SHOULD HAVE SAME LENGTH AS COORDINATES, OR BE MISSING!!!"
+ if (ns > 1) {
+   if (length(direction) == 1)
+     if (!is.na(direction))     stop(msg)
+   if (length(speed) == 1)
+     if (!is.na(speed))     stop(msg)
+   if (length(fill) == 1)
+     if (!is.na(fill))       stop(msg)
+   if (length(temp) == 1)
+     if (!is.na(temp))     stop(msg)
+   if (length(press) == 1)
+     if (!is.na(press))   stop(msg)
+   if (length(dewpt) == 1)
+     if (!is.na(dewpt))   stop(msg)
+   if (length(direction) > 1 & length(direction) != ns)	stop(msg)
+   if (length(speed) > 1 & length(speed) != ns)	stop(msg)
+   if (length(fill) > 1 & length(fill) != ns)	stop(msg)
+   if (length(temp) > 1 & length(temp) != ns)	stop(msg)
+   if (length(press) > 1 & length(press) != ns)	stop(msg)
+   if (length(dewpt) > 1 & length(dewpt) != ns)	stop(msg)
+ }
+ ### mean/sd in order to identify outliers (> 3sd) ###
+ if (ns > 3) {
+   mspd = mean(as.numeric(speed), na.rm=TRUE)
+   rspd = sd(as.numeric(speed), na.rm=TRUE)
+   mt = mean(as.numeric(temp), na.rm=TRUE)
+   rt = sd(as.numeric(temp), na.rm=TRUE)
+   mps = mean(as.numeric(press), na.rm=TRUE)
+   rps = sd(as.numeric(press), na.rm=TRUE)
+   mdpt = mean(as.numeric(dewpt), na.rm=TRUE)
+   rdpt = sd(as.numeric(dewpt), na.rm=TRUE)
+ }
 
-    #
-    # Add circle to base of station annotation symbol if desired.
-    #
+ tpar <- par()
+ size <- tpar$csi
+ scalex <- (tpar$usr[2] - tpar$usr[1])/(tpar$pin[1])
+ scaley <- (tpar$usr[4] - tpar$usr[3])/(tpar$pin[2])
+ scalex <- (cex * (scalex * size))/5
+ scaley <- (cex * (scaley * size))/5
+ for (i in 1:ns) {
+   spdcolor = "green"
+   tcolor = "blue"
+   dptcolor = "blue"
+   pscolor = "blue"
 
-    if(circle) {
-        ts <- seq(0, 2 * pi, , 200)
-        RX <- sin(ts) * scalex
-        X1 <- RX + cx
-        RY <- cos(ts) * scaley
-        Y1 <- RY + cy
-        if (speed == 0) {
-            lines(RX * 2 + cx, RY * 2 + cy)
-        }
-        if (fill > 0) {
-            lim <- c(51, 101, 151, 200)
-            polygon(c(cx, X1[1:lim[fill]]), c(cy, Y1[1:lim[fill]]),
-                density = -1, col = color)
-        }
-        lines(RX + cx, RY + cy)
-        if (!is.null(temp)) {
-            temp.text <- paste(temp, sep = "")
-            temp.x <- cx - 3.25 * scalex
-            temp.y <- cy + 1.25 * scaley
-            text(temp.x, temp.y, labels = temp.text)
-        }
-        if (!is.null(press)) {
-            press.text <- paste( press, sep = "")
-            press.x <- cx + 4.75 * scalex
-            press.y <- cy + 1.25 * scaley
-            text(press.x, press.y, labels = press.text)
-        }
-        if (!is.null(dewpt)) {
-            dewpt.text <- paste( dewpt, sep = "")
-            dewpt.x <- cx - 3.25 * scalex
-            dewpt.y <- cy - 2.25 * scaley
-            text(dewpt.x, dewpt.y, labels = dewpt.text)
-        }
-    } # end of if circle stmt
+   x = cx[i]
+   y = cy[i]
+   if (is.na(x) | is.na(y))	next
+   spd = speed[i]
+   t   = temp[i]
+   ps  = press[i]
+   dpt = dewpt[i]
 
-invisible()
+   if (circle) {
+     ts <- seq(0, 2 * pi, , 200)
+     RX <- sin(ts) * scalex
+     X1 <- RX + x
+     RY <- cos(ts) * scaley
+     Y1 <- RY + y
+     if (!is.na(spd)) {
+       if (spd == 0)	{
+         if (ns > 3) {
+           if (spd < mspd-3*rspd)
+             spdcolor = "red"
+         }
+         lines(RX * 2 + x, RY * 2 + y, col=spdcolor)
+       }
+     }
+     if (fill[i] > 0) {
+         lim <- c(51, 101, 151, 200)
+         polygon(c(x, X1[1:lim[fill[i]]]), c(y, Y1[1:lim[fill[i]]]), 
+             density = -1, col = "green")
+     }
+     lines(RX + x, RY + y, col=spdcolor)
+     if (!is.na(t)) {
+       if (ns > 3) {
+         if (t > mt+3*rt | t < mt-3*rt)
+           tcolor = "red"
+       }
+       temp.text <- paste(t, sep = "")
+       temp.x <- x - 3.75 * scalex
+       temp.y <- y + 1.75 * scaley
+       text(temp.x, temp.y, labels = temp.text, col=tcolor)
+     }
+     if (!is.na(ps)) {
+       if (ns > 3) {
+         if (ps > mps+3*rps | ps < mps-3*rps)
+           pscolor = "red"
+       }
+       press.text <- paste(ps, sep = "")
+       press.x <- x + 4.75 * scalex
+       press.y <- y + 1.25 * scaley
+       text(press.x, press.y, labels = press.text, col=pscolor)
+     }
+     if (!is.na(dpt)) {
+       if (ns > 3) {
+         if (dpt > mdpt+3*rdpt | dpt < mdpt-3*rdpt)
+           dptcolor = "red"
+       }
+       dewpt.text <- paste(dpt, sep = "")
+       dewpt.x <- x - 3.75 * scalex
+       dewpt.y <- y - 2.25 * scaley
+       text(dewpt.x, dewpt.y, labels = dewpt.text, col=dptcolor)
+     }
+   } #end of circle
+
+   if (!is.na(spd)) {
+     xs <- if (spd > 0) {
+       X1 <- 0
+       X2 <- 0
+       Y1 <- 0
+       Y2 <- 5
+       if (spd >= 5 & spd < 10) {
+           X1 <- c(X1, 0)
+           X2 <- c(X2, 1)
+           Y1 <- c(Y1, 5)
+           Y2 <- c(Y2, 5)
+       }
+       if (spd >= 10 & spd < 15) {
+           X1 <- c(X1, 0)
+           X2 <- c(X2, 2)
+           Y1 <- c(Y1, 5)
+           Y2 <- c(Y2, 5)
+       }
+       if (spd >= 15 & spd < 20) {
+           X1 <- c(X1, 0, 0)
+           X2 <- c(X2, 1, 2)
+           Y1 <- c(Y1, 4, 5)
+           Y2 <- c(Y2, 4, 5)
+       }
+       if (spd >= 20 & spd < 25) {
+           X1 <- c(X1, 0, 0)
+           X2 <- c(X2, 2, 2)
+           Y1 <- c(Y1, 4, 5)
+           Y2 <- c(Y2, 4, 5)
+       }
+       if (spd >= 25 & spd < 30) {
+           X1 <- c(X1, 0, 0, 0)
+           X2 <- c(X2, 1, 2, 2)
+           Y1 <- c(Y1, 3, 4, 5)
+           Y2 <- c(Y2, 3, 4, 5)
+       }
+       if (spd >= 30 & spd < 35) {
+           X1 <- c(X1, 0, 0, 0)
+           X2 <- c(X2, 2, 2, 2)
+           Y1 <- c(Y1, 3, 4, 5)
+           Y2 <- c(Y2, 3, 4, 5)
+       }
+       if (spd >= 35 & spd < 40) {
+           X1 <- c(X1, 0, 0, 0, 0)
+           X2 <- c(X2, 1, 2, 2, 2)
+           Y1 <- c(Y1, 2, 3, 4, 5)
+           Y2 <- c(Y2, 2, 3, 4, 5)
+       }
+       if (spd >= 40 & spd < 45) {
+           X1 <- c(X1, 0, 0, 0, 0)
+           X2 <- c(X2, 2, 2, 2, 2)
+           Y1 <- c(Y1, 2, 3, 4, 5)
+           Y2 <- c(Y2, 2, 3, 4, 5)
+       }
+       if (spd >= 45 & spd < 50) {
+           X1 <- c(X1, 0, 0, 0, 0, 0)
+           X2 <- c(X2, 1, 2, 2, 2, 2)
+           Y1 <- c(Y1, 1, 2, 3, 4, 5)
+           Y2 <- c(Y2, 1, 2, 3, 4, 5)
+       }
+       if (spd >= 50 & spd < 55) {
+           X1 <- c(X1, 0, 0)
+           X2 <- c(X2, 2, 2)
+           Y1 <- c(Y1, 4, 5)
+           Y2 <- c(Y2, 4.5, 4.5)
+       }
+       if (spd >= 55 & spd < 60) {
+           X1 <- c(X1, 0, 0, 0)
+           X2 <- c(X2, 1, 2, 2)
+           Y1 <- c(Y1, 3, 4, 5)
+           Y2 <- c(Y2, 3, 4.5, 4.5)
+       }
+       if (spd >= 60 & spd < 65) {
+           X1 <- c(X1, 0, 0, 0)
+           X2 <- c(X2, 2, 2, 2)
+           Y1 <- c(Y1, 3, 4, 5)
+           Y2 <- c(Y2, 3, 4.5, 4.5)
+       }
+       dir <- (direction[i]/360) * 2 * pi
+       rot <- cbind(c(cos(dir), -sin(dir)), c(sin(dir), 
+           cos(dir)))
+       S1 <- rbind(X1, Y1)
+       S2 <- rbind(X2, Y2)
+       S1 <- rot %*% S1
+       S2 <- rot %*% S2
+       S1 <- S1 * c(scalex, scaley) + c(x, y)
+       S2 <- S2 * c(scalex, scaley) + c(x, y)
+     }
+     if (spd > 0) {
+       if (ns > 3) {
+         if (spd > mspd+3*rspd | spd < mspd-3*rspd)
+           spdcolor = "red"
+       }
+       segments(S1[1, ], S1[2, ], S2[1, ], S2[2, ], col=spdcolor, lwd=2)
+     }
+   } #end of (!is.na(spd))
+ } #end of ns
+ invisible()
 }

@@ -24,14 +24,12 @@
 #    draw the dewpoint in color 7
 #    overlay the temperature observations in a different color
 #    you get the point ...
-
-filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
-sample.sonde <- getsonde(filename)
+data(ExampleSonde)
 skewt.axis()
-skewt.lines( sample.sonde$temp,  sample.sonde$press, col = 6)
-skewt.lines( sample.sonde$dewpt, sample.sonde$press, col = 7)
-skewt.points(sample.sonde$temp,  sample.sonde$press, col = 3)
-skewt.points(sample.sonde$dewpt, sample.sonde$press, col = 4)
+skewt.lines( ExampleSonde$temp,  ExampleSonde$press, col = 6)
+skewt.lines( ExampleSonde$dewpt, ExampleSonde$press, col = 7)
+skewt.points(ExampleSonde$temp,  ExampleSonde$press, col = 3)
+skewt.points(ExampleSonde$dewpt, ExampleSonde$press, col = 4)
 }
 
 \keyword{ aplot }

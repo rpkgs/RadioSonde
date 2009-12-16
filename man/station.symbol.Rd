@@ -6,9 +6,8 @@
               wind, temperature, pressure, dewpoint ...  to a given plot. }
 
 \usage{
-station.symbol(cx, cy, direction = 0, speed = 0, fill = 0, 
-		color = "green", temp = NULL, press = NULL, 
-		dewpt = NULL, circle=TRUE, cex = 2)
+station.symbol(cx, cy, direction=0, speed=NA, fill=rep(0,length(cx)), temp=NA,
+                  press=NA, dewpt=NA, circle=TRUE, cex=1)
 }
 
 \arguments{
@@ -18,7 +17,6 @@ station.symbol(cx, cy, direction = 0, speed = 0, fill = 0,
   \item{speed}{Wind speed.}
   \item{fill}{Fill for visibility: 0 = clear skies, 1 = 25\% obscured, 
               2 = 50\% obscured, 3 = 75\% obscured, 4 = no visibility }
-  \item{color}{Fill color. Used only when fill > 0}
   \item{temp}{Temperature value to plot symbol (must be a scalar).
               If NULL then no temperature value will be annotated.}
   \item{press}{Pressure value to plot symbol (must be a scalar).
@@ -41,8 +39,8 @@ station.symbol(cx, cy, direction = 0, speed = 0, fill = 0,
 
 \examples{
    plot(0:1, 0:1, type="n")
-   station.symbol(0.5, 0.5, direction=75, speed=30, fill=3, 
-                  temp=31, press=987, dewpt=26)
+   station.symbol(0.5, 0.5, direction=130, speed=30, fill=3, 
+                  temp=31, press=987, dewpt=26, cex=5)
 }
 
 \keyword{ aplot }

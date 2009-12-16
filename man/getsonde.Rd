@@ -25,8 +25,10 @@
    quantity in each of the columns and is separated from the data by a particular
    character string. The location of this string in the file is crucial in deciphering
    the start of the datastream from the metadata. For much more about the file format,
-   go to \url{http://www.cgd.ucar.edu/stats/RadioSonde} or look at the example in 
-   \file{RadioSonde/data/ExampleSonde.txt}
+   look at the example in    \file{RadioSonde/inst/exampleData/ExampleSonde.txt}. To find the 
+   exact path and file name on your system try 
+   \code{system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")}.
+
 }
 
 \value{
@@ -89,20 +91,27 @@ automatically interpreted without knowledge of the recording system.}
 # The datakey,varkey,and unitkey arguments come from examining 
 # the datafile. The whitespace is important.
 
-filename <- system.file("exampleData", "ExampleSonde.txt", package = "RadioSonde")   
-datakey  <- "------"
-varkey   <- " Time"
-unitkey  <- "  sec"
-sample.sonde <- getsonde(filename,datakey,varkey,unitkey)
-attr(sample.sonde,"units")
-attr(sample.sonde,"metadata")
-plotsonde(sample.sonde,title=filename)
+# The Sonde text file is stored in this package as a text dataset (this is just
+# to make it easier to include in the package.)
+# First create a real text file to read in
+  data( ExampleSondeText)
+  write( ExampleSondeText, file="SondeFile.txt")
+
+  sample.sonde <- getsonde("SondeFile.txt")
+# NOTE this assumes that the default datakey, varkey and unitkey. 
+# it is best to check the file for these choices!
+  attr(sample.sonde,"units")
+  attr(sample.sonde,"metadata")
+
+#  skewt plot of data
+  plotsonde(sample.sonde,title="SondeFile.txt")
+
 #
 # Read the same radiosonde dataset, but ignore the units ... 
 #
-datakey  <- "------"
-varkey   <- " Time"
-sample.sonde <- getsonde(filename,datakey,varkey)
-attr(sample.sonde,"metadata")
+  datakey  <- "------"
+  varkey   <- " Time"
+  sample.sonde <- getsonde("SondeFile.txt",datakey,varkey)
+  attr(sample.sonde,"metadata")
 }
 \keyword{ manip }        % at least one, from doc/KEYWORDS
