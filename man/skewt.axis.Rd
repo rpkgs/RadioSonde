@@ -36,7 +36,7 @@ ratio (dashed) }
         \code{plotsonde} if you choose to plot the wind profile 
         adjacent to the skewt axis. }
 
-\author{ Tim Hoar }
+\author{Doug Nychka}
 \seealso{ \code{\link{getsonde}}, 
           \code{\link{plotsonde}}, 
           \code{\link{skewt.lines}}, 

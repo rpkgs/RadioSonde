@@ -30,7 +30,7 @@
 
 \value{None -- creates a plot.}
 
-\author{ Eric Gilleland, Tim Hoar, Doug Nychka }
+\author{  Doug Nychka, Eric Gilleland}
 
 \seealso{ \code{\link{getsonde}}, \code{\link{plotsonde}} }
 

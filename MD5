@@ -1,6 +1,6 @@
 393a5ca445f6965873eca0259a17f833 *COPYING
 96cefe4196409246941d3efcf7e16192 *ChangeLog
-175f1b7087d680743e34955ce24917d3 *DESCRIPTION
+f5ad84c62ee6007e9fce5922bf0ee7b7 *DESCRIPTION
 f2159fc3acf9f6c99a4c43dd8402a809 *INDEX
 9fdfeb11f7ddba6f3aab9aaa6b1ac5dd *NAMESPACE
 d9f00c9ddc08ade096cfb911ec2db861 *R/PWV.R
@@ -22,10 +22,10 @@ f2bdfb61548ddd43f600af8c0a935abd *data/ExampleSonde.rda
 c5eddacae3947a7d4d507572e6f3c6a8 *man/Example.Rd
 62fb914ab139d941fd68ae8dd3fd47b6 *man/PWV.Rd
 947699e86028e5fbfc25efd2d03ec0f5 *man/RadioSonde-internal.Rd
-b23f5d3050264ba119bec2bc4a7c5671 *man/getsonde.Rd
-cddd253ebba719fce68ad8161e628f2f *man/plotsonde.Rd
-b7a4b1b40484ee0bb85f5e6a003969c3 *man/plotwind.Rd
-202b92dfad68b7f2ce23c39d9015d054 *man/skewt.axis.Rd
+ad4601a9f18c2952812d6ebfdb304e54 *man/getsonde.Rd
+e40631ae17a1c979e91641a26731064e *man/plotsonde.Rd
+0c0a9165e4673bc33c71398904f9264a *man/plotwind.Rd
+4159fb4d9821e50c48395ec35ffcea0d *man/skewt.axis.Rd
 886ed03c2c1cf02d7bb2ce1789f5acdf *man/skewt.lines.Rd
 ea48d333afa042dde8c7eb3256f59d4b *man/skewt.points.Rd
 02dcdae91b3e522119060151d2181a45 *man/station.symbol.Rd

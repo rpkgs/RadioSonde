@@ -64,7 +64,7 @@
    valuable metadata, it is included as another attribute: \code{metadata}.\cr
 }
 
-\author{ Tim Hoar, Eric Gilleland, Doug Nychka }
+\author{Doug Nychka,Eric Gilleland }
 
 \note{
    The Quality Control information (flags): qp, qt, qh, qu, qv, and quv 

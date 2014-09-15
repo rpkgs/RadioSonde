@@ -53,7 +53,7 @@
 
 	6. \url{http://weather.unisys.com/upper_air/skew/details.html}
 }
-\author{ Tim Hoar, Eric Gilleland, Doug Nychka}
+\author{  Doug Nychka, Eric Gilleland,}
 \seealso{ \code{\link{getsonde}}, 
           \code{\link{skewt.axis}} ,
           \code{\link{skewt.lines}} ,
