@@ -1,7 +1,3 @@
-"skewt.lines" <-
-function(temp, pressure, ...)
-{
-#
 # Copyright 2001,2002 Tim Hoar
 #
 # This file is part of the RadioSonde library for R and related languages.
@@ -19,8 +15,28 @@ function(temp, pressure, ...)
 # You should have received a copy of the GNU General Public License
 # along with RadioSonde; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#
+
+"skewt.lines" <- function(temp, pressure, ...) {
 	v <- skewty(pressure[pressure > 100])
 	u <- skewtx(temp[pressure > 100], v)
 	lines(u, v, ...)
+}
+
+"skewt.points" <- function(temp, pressure, ...) {
+  v <- skewty(pressure)
+  u <- skewtx(temp, v)
+  points(u, v, ...)
+}
+
+# Determine x-coordinate on skew-T, log p diagram given temperature (C) and
+# y-coordinate from FUNCTION SKEWTY.  X-origin at T=0c.
+skewtx <- function(temp, ycoord) {
+  0.54000000000000004 * temp + 0.90691999999999995 * ycoord
+}
+
+# y-coordinate on skew-T, log p diagram given pressure (mb).
+# Y-origin at p=1000 mb.
+# SKEWTY = 132.182 - 44.061 * ALOG10(PRES)
+skewty <- function(pres) {
+  132.18199999999999 - 44.061 * log10(pres)
 }

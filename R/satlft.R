@@ -1,7 +1,3 @@
-"satlft" <-
-function(thw, p)
-{
-#
 # Copyright 2001,2002 Tim Hoar
 #
 # This file is part of the RadioSonde library for R and related languages.
@@ -19,8 +15,8 @@ function(thw, p)
 # You should have received a copy of the GNU General Public License
 # along with RadioSonde; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#
 
+satlft <- function(thw, p) {
 	cta <- 273.14999999999998
 	akap <- 0.28541
 	pwrp <- (p/1000.)^akap
