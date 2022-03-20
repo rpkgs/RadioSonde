@@ -16,69 +16,60 @@
 # along with RadioSonde; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-"skewt.axis" <-
-  function(BROWN = "brown", GREEN = "green", redo = FALSE, ...) {
-    tmr <- function(w, p) {
-      # Determine x-coordinate on skew-T, log p diagram given temperature (C)
-      # and y-coordinate from FUNCTION SKEWTY.  X-origin at T=0c.
-      #
-      #            "algorithms for generating a skew-t, log p
-      #            diagram and computing selected meteorological
-      #            quantities."
-      #            atmospheric sciences laboratory
-      #            u.s. army electronics command
-      #            white sands missile range, new mexico 88002
-      #            33 pages
-      #       baker, schlatter  17-may-1982
-      #   this function returns the temperature (celsius) on a mixing
-      #   ratio line w (g/kg) at pressure p (mb). the formula is
-      #   given in
-      #   table 1 on page 7 of stipanuk (1973).
-      #
-      #   initialize constants
-      c1 <- 0.049864645499999999
-      c2 <- 2.4082965000000001
-      c3 <- 7.0747499999999999
-      c4 <- 38.9114
-      c5 <- 0.091499999999999998
-      c6 <- 1.2035
-      x <- log10((w * p) / (622. + w))
-      tmrk <- 10^(c1 * x + c2) - c3 + c4 * ((10.^(c5 * x) - c6)^
-        2.)
-      tmrk - 273.14999999999998
-    }
-    tda <- function(o, p) {
-      #       reference stipanuk paper entitled:
-      #            "algorithms for generating a skew-t, log p
-      #            diagram and computing selected meteorological
-      #            quantities."
-      #            atmospheric sciences laboratory
-      #            u.s. army electronics command
-      #            white sands missile range, new mexico 88002
-      #            33 pages
-      #       baker, schlatter  17-may-1982
-      #   this function returns the temperature tda (celsius)
-      #   on a dry adiabat
-      #   at pressure p (millibars). the dry adiabat is given by
-      #   potential temperature o (celsius). the computation is
-      #   based on
-      #   poisson's equation.
-      ok <- o + 273.14999999999998
-      tdak <- ok * ((p * 0.001)^0.28599999999999998)
-      tdak - 273.14999999999998
-    }
+#' The temperature (celsius) on a mixing ratio line w (g/kg) at pressure p (mb).
+#' 
+#' Determine x-coordinate on skew-T, log p diagram given temperature (C) and
+#' y-coordinate from FUNCTION SKEWTY. X-origin at `T = 0c`.
+#' 
+#' @references 
+#' 1. "algorithms for generating a skew-t, log p diagram and computing selected
+#'    meteorological quantities." atmospheric sciences laboratory u.s. army
+#'    electronics command white sands missile range, new mexico 88002 33 pages
+#'    (baker, schlatter, 17-may-1982).
+#' 2. the formula is given in table 1 on page 7 of stipanuk (1973).
+#' 
+#' @return the temperature (celsius) on a mixing ratio line w (g/kg) at pressure
+#'   p (mb). 
+tmr <- function(w, p) {
+	#   initialize constants
+	c1 <- 0.049864645499999999
+	c2 <- 2.4082965000000001
+	c3 <- 7.0747499999999999
+	c4 <- 38.9114
+	c5 <- 0.091499999999999998
+	c6 <- 1.2035
+	x <- log10((w * p) / (622. + w))
+	tmrk <- 10^(c1 * x + c2) - c3 + c4 * ((10.^(c5 * x) - c6) ^ 2.)
+	tmrk - 273.14999999999998
+}
+
+#' The temperature `tda` (celsius) on a dry adiabat at pressure p (millibars)
+#' 
+#' The dry adiabat is given by potential temperature o (celsius). the
+#' computation is based on poisson's equation.
+#' 
+#' @references
+#' 1. "algorithms for generating a skew-t, log p diagram and computing selected
+#'    meteorological quantities." atmospheric sciences laboratory u.s. army
+#'    electronics command white sands missile range, new mexico 88002 33 pages
+#' 	  (baker, schlatter, 17-may-1982).
+#' @export
+tda <- function(o, p) {
+	ok <- o + 273.14999999999998
+	tdak <- ok * ((p * 0.001)^0.28599999999999998)
+	tdak - 273.14999999999998
+}
+
+"skewt.axis" <- function(BROWN = "brown", GREEN = "green", redo = FALSE, ...) {
     #---------------------------------------------------------------------
-    #
     # This program generates a skew-T, log p thermodynamic diagram.  This
     # program was derived to reproduce the USAF skew-T, log p diagram
     # (form DOD-WPC 9-16-1  current as of March 1978).
-    #
     #---------------------------------------------------------------------
     par(pty = "s", ...)
-    # --- Define absoulute x,y max/min bounds corresponding to the outer
-    # --- edges of the diagram. These are computed by inverting the
-    # --- appropriate
-    # --- pressures and temperatures at the corners of the diagram.
+    # Define absoulute x,y max/min bounds corresponding to the outer edges of
+    # the diagram. These are computed by inverting the appropriate pressures and
+    # temperatures at the corners of the diagram.
     ymax <- skewty(1050)
     # actually at the bottom ~ -0.935
     ymin <- skewty(100)
@@ -167,9 +158,8 @@
     # FOR ISOTHERMS TERMINATING ALONG RIGHT EDGE, WE KNOW
     # --- TEMP,X = XMAX, FIND PRES
     inds <- seq(1, length(temp))[temp > 30]
-    exponent <- (132.18199999999999 - (xmax - 0.54000000000000004 * temp[
-      inds
-    ]) / 0.90691999999999995) / 44.061
+    exponent <- (132.18199999999999 - (xmax - 0.54000000000000004 *  temp[inds]) / 
+			0.90691999999999995) / 44.061
     rendt[inds] <- 10^exponent
     # T = 10, 20, 30 are special cases. don't know the exact x just yet
     rendt[temp == 10] <- 430
@@ -244,8 +234,7 @@
     )
     #---------------------------------------------------------------------
     # --- DRAW DRY ADIABATS.
-    # --- Iterate in 10 mb increments to compute the x,y points on the
-    # ---  curve.
+    # --- Iterate in 10 mb increments to compute the x,y points on the curve.
     #---------------------------------------------------------------------
     # Declare adiabat values and pressures where adiabats intersect the
     # edge of the skew-T diagram.  Refer to a skew-T diagram if necessary.
@@ -260,10 +249,7 @@
       180, 155, 133, 115
     )
     for (itheta in 1:NTHETA) {
-      p <- seq(
-        from = lendth[itheta], to = rendth[itheta], length =
-          200
-      )
+      p <- seq( from = lendth[itheta], to = rendth[itheta], length = 200 )
       sy <- skewty(p)
       dry <- tda(theta[itheta], p)
       sx <- skewtx(dry, sy)

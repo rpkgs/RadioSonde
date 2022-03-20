@@ -5,7 +5,7 @@
 \alias{skewtx}
 \alias{skewty}
 \alias{sonde.data}
-\alias{td.to.q}
+\alias{Tdew2q}
 \alias{wobf}
 
 \title{
@@ -26,7 +26,7 @@ skewty(pres)
 
 sonde.data
 
-td.to.q(temp, td, p)
+Tdew2q(temp, td, p)
 
 wobf
 

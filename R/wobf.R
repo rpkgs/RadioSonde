@@ -16,38 +16,33 @@
 # along with RadioSonde; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#-----------------------------------------------------------------------
-#
-# this function calculates the difference of the wet-bulb potential
-# temperatures for saturated and dry air given the temperature.
-#
-#-----------------------------------------------------------------------
-# include 'lib_dev:[gudoc]edfvaxbox.for/list'
 # baker, schlatter  17-may-1982	  original version.
-#      let wbpts = wet-bulb potential temperature for saturated
-# air at temperature t (celsius). let wbptd = wet-bulb potential
-# temperature for completely dry air at the same temperature t.
-# the wobus function wobf (in degrees celsius) is defined by
-#                    wobf(t) = wbpts-wbptd.
-# although wbpts and wbptd are functions of both pressure and
-# temperature, their difference is a function of temperature only.
-#      to understand why, consider a parcel of dry air at tempera-
-# ture t and pressure p. the thermodynamic state of the parcel is
-# represented by a point on a pseudoadiabatic chart. the wet-bulb
-# potential temperature curve (moist adiabat) passing through this
-# point is wbpts. now t is the equivalent temperature for another
-# parcel saturated at some lower temperature tw, but at the same
-# pressure p.  to find tw, ascend along the dry adiabat through
-# (t,p). at a great height, the dry adiabat and some moist
-# adiabat will nearly coincide. descend along this moist adiabat
-# back to p. the parcel temperature is now tw. the wet-bulb
-# potential temperature curve (moist adiabat) through (tw,p) is wbptd.
-# the difference (wbpts-wbptd) is proportional to the heat imparted
-# to a parcel saturated at temperature tw if all its water vapor
-# were condensed. since the amount of water vapor a parcel can
-# hold depends upon temperature alone, (wbptd-wbpts) must depend
-# on temperature alone.
-#      the wobus function is useful for evaluating several thermo-
+
+#' @details
+#' - `wbpts`: wet-bulb potential temperature for saturated air at temperature t
+#'   (celsius). 
+#' - `wbptd`: wet-bulb potential temperature for completely dry air at the same
+#'   temperature t.
+#' - `wobus`:  `wbpts` - `wbptd`
+#' 
+#' Although `wbpts` and `wbptd` are functions of both pressure and temperature,
+#' their difference is a function of temperature only.
+#' 
+#' To understand why, consider a parcel of dry air at temperature `t` and pressure
+#' `p`. The thermodynamic state of the parcel is represented by a point on a
+#' pseudoadiabatic chart. The wet-bulb potential temperature curve (moist
+#' adiabat) passing through this point is `wbpts`. Now `t` is the equivalent
+#' temperature for another parcel saturated at some lower temperature tw, but at
+#' the same pressure `p`. To find `tw`, ascend along the dry adiabat through
+#' (`t`, `p`). at a great height, the dry adiabat and some moist adiabat will nearly
+#' coincide. Descend along this moist adiabat back to `p`. the parcel temperature
+#' is now tw. the wet-bulb potential temperature curve (moist adiabat) through
+#' (`tw`, `p`) is `wbptd`. The difference (wbpts-wbptd) is proportional to the heat
+#' imparted to a parcel saturated at temperature `tw` if all its water vapor
+#' were condensed. since the amount of water vapor a parcel can hold depends
+#' upon temperature alone, (`wbptd`-`wbpts`) must depend on temperature alone.
+
+# The wobus function is useful for evaluating several thermo-
 # dynamic quantities.  by definition:
 # 		    wobf(t) = wbpts-wbptd.               (1)
 # if t is at 1000 mb, then t is a potential temperature pt and
@@ -65,6 +60,7 @@
 # that the air at 1000 mb is completely dry), then wbpts = ept
 # and wbptd = wbpt. thus
 # 		    wobf(ept) = ept-wbpt.
+
 # this form is the basis for a polynomial approximation to wobf.
 # in table 78 on pp.319-322 of the smithsonian meteorological
 # tables by roland list (6th revised edition), one finds wet-bulb
@@ -77,6 +73,11 @@
 #                                  notes by t.w. schlatter
 #                                  noaa/erl/profs program office
 #                                  august 1981
+
+#' The difference of the wet-bulb potential temperatures for saturated and dry
+#' air given the temperature.
+#' 
+#' @export
 wobf <- function(temp) {
   x <- temp - 20.
   if (x <= 0.) {

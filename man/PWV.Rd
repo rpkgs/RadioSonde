@@ -24,7 +24,7 @@ PWV(sonde = NULL, press, td, temp, minp = 400)
 }
 \author{ Junhong Wang }
 
-\seealso{ \code{\link{getsonde}}, \code{td.to.q} }
+\seealso{ \code{\link{getsonde}}, \code{Tdew2q} }
 
 \examples{
 # Example 1
